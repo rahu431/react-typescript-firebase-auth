@@ -1,19 +1,23 @@
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
+// import "firebase/auth";
+// import "firebase/database";
+
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore/lite";
+import { getAuth } from "firebase/auth";
 
 const config = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  projectId: "YOUR PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET"
+  apiKey: "AIzaSyAdtPNdLLHl66jLPs_Nppce3u4nObi3MFM",
+  appId: "1:86065592930:web:53a33009bd4c0f667cef3b",
+  authDomain: "db-migration-42a2b.firebaseapp.com",
+  databaseURL:
+    "https://db-migration-42a2b-default-rtdb.asia-southeast1.firebasedatabase.app",
+  messagingSenderId: "86065592930",
+  projectId: "db-migration-42a2b",
+  storageBucket: "db-migration-42a2b.appspot.com",
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
-
-export const auth = firebase.auth();
-export const db = firebase.database();
+// Check if Firebase app is not already initialized, then initialize it
+const app = initializeApp(config);
+const db = getFirestore(app);
+export const auth = getAuth(app);
+export { db }; // Export the Firestore instance for use in other files, if needed
